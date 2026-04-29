@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+    # Enable Rewrite Engine
+    RewriteEngine On
+    Options -MultiViews -Indexes
+
+    # Redirect all requests to index.php if not a real file or directory
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Optional: Prevent access to hidden files like .env or .git
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Optional: Handle Authorization header for APIs / SPA (uncomment if needed)
+# RewriteCond %{HTTP:Authorization} .
+# RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# RewriteCond %{HTTP:x-xsrf-token} .
+# RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
